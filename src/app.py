@@ -12,7 +12,6 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
-
 def get_post(post_id):
     conn = get_db_connection()
     post = conn.execute('SELECT * FROM posts WHERE id = ?',
@@ -22,7 +21,8 @@ def get_post(post_id):
         abort(404)
     return post
 
-app = Flask(__name__,static_folder=static_path, template_folder=template_path)
+
+app = Flask(__name__,static_folder=static_path,template_folder=template_path)
 app.config['SECRET_KEY'] = 'This is my secret key.'
 
 @app.route('/')
