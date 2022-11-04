@@ -1,9 +1,9 @@
 from setuptools import setup
 setup(
-    name="flasklearning",
+    name="docker",
     version="1.0.0",
-    description="This is a simple web application implemented using flask",
+    description="This is a simple web application implemented using flask and implemented using docker",
     author="Sulav",
-    packages=['src'],
+    packages=['flask_code/src'],
     install_requrires=[]
     )

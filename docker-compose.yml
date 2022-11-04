@@ -1,14 +1,7 @@
-version: '3.9'
+version: "3.8"
 services:
-    db:
-        build: .
-
-    post:
-        build: ./src
+    flask:
+        build: ./flask_code
         ports:
-            - "5000:5000"
-        links:
-            - "db"
-            - "templates"
-    templates:
-        build: ./templates
+            - 5000:5000
+        
