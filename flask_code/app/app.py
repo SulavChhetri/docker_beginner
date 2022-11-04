@@ -1,10 +1,7 @@
-import sqlite3,os
+import sqlite3
 from flask import Flask, render_template, request, url_for, flash, redirect
 from werkzeug.exceptions import abort
-from pathlib import Path
-ROOT_DIR = Path(__file__).parent.parent
-template_path = os.path.join(ROOT_DIR,'templates')
-static_path = os.path.join(ROOT_DIR,'static')
+
 
 def get_db_connection():
     conn = sqlite3.connect('database.db')
@@ -21,7 +18,7 @@ def get_post(post_id):
     return post
 
 
-app = Flask(__name__,static_folder='./static',template_folder='./templates')
+app = Flask(__name__)
 app.config['SECRET_KEY'] = 'This is my secret key.'
 
 @app.route('/')
@@ -88,4 +85,4 @@ def delete(id):
     return redirect(url_for('index'))
 
 if __name__=="__main__":
-    app.run(debug=True)
+    app.run(debug=True,host='0.0.0.0', port= 5000)
