@@ -1,15 +1,15 @@
-FROM python:alpine
+FROM python:3.8-slim-buster
 
 LABEL Maintainer="sulavthapa"
 
-RUN pip install flask
-
 WORKDIR /src
 
-COPY . /src/
+RUN pip install flask
 
-EXPOSE 5000
 
-CMD ["python","app.py"]
+COPY . .
+
+CMD ["python3","app.py"]
+# EXPOSE 5000
 # CMD [ "flask", "run","--host","0.0.0.0","--port","5000"]
 
