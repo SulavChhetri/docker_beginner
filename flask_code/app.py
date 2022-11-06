@@ -1,7 +1,9 @@
 import sqlite3
 from flask import Flask, render_template, request, url_for, flash, redirect
 from werkzeug.exceptions import abort
+import redis
 
+redis_database = redis.Redis(host='localhost', port=6379, db=0)
 
 def get_db_connection():
     conn = sqlite3.connect('database.db')
@@ -84,6 +86,11 @@ def delete(id):
     conn.close()
     flash('"{}" was successfully deleted!'.format(post['title']))
     return redirect(url_for('index'))
+
+@app.route('/visitcount')
+def visitcount():
+    value =redis_database.incr(name="value",amount=1)
+    return str(value)
 
 if __name__=="__main__":
     app.run(debug=True,host='0.0.0.0', port= 5000)
