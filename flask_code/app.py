@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, url_for, flash, redirect
 from werkzeug.exceptions import abort
 import redis
 
-redis_database = redis.Redis(host='localhost', port=6379, db=0)
+redis_database = redis.Redis(host='redis', port=6379, db=0,decode_responses=True)
 
 def get_db_connection():
     conn = sqlite3.connect('database.db')

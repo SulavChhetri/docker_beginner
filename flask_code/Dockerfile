@@ -5,11 +5,12 @@ LABEL Maintainer="sulavthapa"
 WORKDIR /src
 
 RUN pip install flask
-
+RUN pip install redis
 
 COPY . .
 
 CMD ["python3","app.py"]
+
 # EXPOSE 5000
 # CMD [ "flask", "run","--host","0.0.0.0","--port","5000"]
 
