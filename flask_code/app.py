@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, url_for, flash, redirect
 from werkzeug.exceptions import abort
 import redis
 
-redis_database = redis.Redis(host='redis', port=6379, db=0,decode_responses=True)
+redis_database = redis.Redis(host='localhost', port=6379, db=0)
 
 def get_db_connection():
     conn = sqlite3.connect('database.db')
@@ -34,7 +34,6 @@ def index():
 @app.route('/<int:post_id>')
 def post(post_id):
     post = get_post(post_id)
-    # return "Hello World"
     return render_template('post.html', post=post)
 
 @app.route('/create', methods=('GET', 'POST'))
@@ -59,7 +58,6 @@ def create():
 @app.route('/<int:id>/edit', methods=('GET', 'POST'))
 def edit(id):
     post = get_post(id)
-
     if request.method == 'POST':
         title = request.form['title']
         content = request.form['content']
@@ -91,6 +89,16 @@ def delete(id):
 def visitcount():
     value =redis_database.incr(name="value",amount=1)
     return str(value)
+
+@app.route('/display',methods = ('GET','POST'))
+def display():
+    display='No display message for now!!'
+    if request.method=="POST":
+        display = request.form['display']
+        return render_template('display.html',display=display,data = " ")
+
+    return render_template('display.html',display = display)
+
 
 if __name__=="__main__":
     app.run(debug=True,host='0.0.0.0', port= 5000)
